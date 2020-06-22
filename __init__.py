@@ -34,7 +34,7 @@ def brewersfriend_background_task(api):
         unit = cbpi.get_config_parameter("unit", "C")
         data = {"name": name, "temp": temp, "temp_unit": unit}
         response = requests.post(bf_uri + api_key, json=data)
-        if response.status_code != 200:
+        if response.status_code != 200 and response.status_code != 429:
           cbpi.notify("Brewer's Friend Error",
                       "Received unsuccessful response. Ensure API key is correct. HTTP Error Code: " + str(response.status_code),
                       type="danger", timeout=None)
